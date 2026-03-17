@@ -17,7 +17,7 @@ public class API
 {
     private String URI = "https://vind-og-klima-app.videnomvind.dk/api/stats?location=vindtved";
 
-    public List getLatestReading() {
+    public List getLatestReading() throws URISyntaxException, IOException, InterruptedException {
         HttpClient client = HttpClient.newBuilder().build();
 
         HttpRequest request = HttpRequest
@@ -37,8 +37,7 @@ public class API
         return latestReadings;
     }
 
-    public List getLatestReadingLastMonth()
-    {
+    public List getLatestReadingLastMonth() throws URISyntaxException, IOException, InterruptedException {
         HttpClient client = HttpClient.newBuilder().build();
 
         HttpRequest request = HttpRequest
