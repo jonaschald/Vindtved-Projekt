@@ -6,6 +6,7 @@ module com.example.vindtved_projekt {
     requires com.google.gson;
     requires javafx.base;
     requires transitive com.microsoft.sqlserver.jdbc;
+    requires java.sql;
 
 
     opens com.example.vindtved_projekt to javafx.fxml;

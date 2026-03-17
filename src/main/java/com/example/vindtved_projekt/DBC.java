@@ -2,6 +2,8 @@ package com.example.vindtved_projekt;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 
+import java.sql.Connection;
+
 public class DBC {
 
     private SQLServerDataSource kilde;
@@ -18,6 +20,13 @@ public class DBC {
 
     public void insertDataIntoDB()
     {
+        try (Connection forbindelse = kilde.getConnection())
+        {
+            
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
