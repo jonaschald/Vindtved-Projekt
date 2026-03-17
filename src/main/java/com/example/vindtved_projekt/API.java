@@ -13,30 +13,48 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class API {
-    public API() throws URISyntaxException, IOException, InterruptedException {
+public class API
+{
+    private String URI = "https://vind-og-klima-app.videnomvind.dk/api/stats?location=vindtved";
 
-    HttpClient client = HttpClient.newBuilder().build();
+    public List getLatestReading() {
+        HttpClient client = HttpClient.newBuilder().build();
 
-    HttpRequest request = HttpRequest
-            .newBuilder()
-            .uri(new URI("https://vind-og-klima-app.videnomvind.dk/api/stats?location=vindtved"))
-            .GET()
-            .build();
+        HttpRequest request = HttpRequest
+                .newBuilder()
+                .uri(new URI(URI))
+                .GET()
+                .build();
 
-    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-    JsonObject jObject = JsonParser.parseString(response.body()).getAsJsonObject();
+        JsonObject jObject = JsonParser.parseString(response.body()).getAsJsonObject();
 
-    Gson gson = new Gson();
-    APILatestReading latestReading = gson.fromJson(jObject.get("latest_reading"), APILatestReading.class);
-    List<APILatestReading> latestReadings = gson.fromJson(jObject.get("latest_readings"), ArrayList.class);
+        Gson gson = new Gson();
+        APILatestReading latestReading = gson.fromJson(jObject.get("latest_reading"), APILatestReading.class);
+        List<APILatestReading> latestReadings = gson.fromJson(jObject.get("latest_readings"), ArrayList.class);
 
-        System.out.println(latestReading.data.turbines.get("wtg02"));
+        return latestReadings;
+    }
 
-        System.out.println(latestReading.data.turbines.get("wtg03"));
-        System.out.println(latestReading.windSpeed);
-        System.out.println(latestReading.windEffect);
+    public List getLatestReadingLastMonth()
+    {
+        HttpClient client = HttpClient.newBuilder().build();
 
+        HttpRequest request = HttpRequest
+                .newBuilder()
+                .uri(new URI(URI))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        JsonObject jObject = JsonParser.parseString(response.body()).getAsJsonObject();
+
+        Gson gson = new Gson();
+        APILatestReading latestReadingLastMonth = gson.fromJson(jObject.get("last_month"), APILatestReading.class);
+        List<APILatestReading> latestReadingsLastMonth = gson.fromJson(jObject.get("last_month"), ArrayList.class);
+
+        return latestReadingsLastMonth;
     }
 }
