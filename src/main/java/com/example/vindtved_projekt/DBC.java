@@ -15,4 +15,10 @@ public class DBC {
         kilde.setServerName("10.176.111.34");
         kilde.setTrustServerCertificate(true);
     }
+
+    public void insertDataIntoDB()
+    {
+
+    }
+
 }
