@@ -49,6 +49,7 @@ public class API
         JsonObject jObject = JsonParser.parseString(response.body()).getAsJsonObject();
 
         Gson gson = new Gson();
+
         return gson.fromJson(jObject.get("last_month"), APILatestReading[].class);
     }
 }
