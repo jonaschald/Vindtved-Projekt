@@ -4,6 +4,7 @@ module com.example.vindtved_projekt {
     requires javafx.graphics;
     requires java.net.http;
     requires com.google.gson;
+    requires javafx.base;
 
 
     opens com.example.vindtved_projekt to javafx.fxml;
