@@ -10,14 +10,13 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.List;
 
 public class API
 {
     private String URI = "https://vind-og-klima-app.videnomvind.dk/api/stats?location=vindtved";
 
-    public List getLatestReading() throws URISyntaxException, IOException, InterruptedException {
+    public APILatestReading getLatestReading() throws URISyntaxException, IOException, InterruptedException
+    {
         HttpClient client = HttpClient.newBuilder().build();
 
         HttpRequest request = HttpRequest
@@ -31,13 +30,12 @@ public class API
         JsonObject jObject = JsonParser.parseString(response.body()).getAsJsonObject();
 
         Gson gson = new Gson();
-        APILatestReading latestReading = gson.fromJson(jObject.get("latest_reading"), APILatestReading.class);
-        List<APILatestReading> latestReadings = gson.fromJson(jObject.get("latest_readings"), ArrayList.class);
 
-        return latestReadings;
+        return gson.fromJson(jObject.get("latest_reading"), APILatestReading.class);
     }
 
-    public List getLatestReadingLastMonth() throws URISyntaxException, IOException, InterruptedException {
+    public APILatestReading[] getLatestReadingLastMonth() throws URISyntaxException, IOException, InterruptedException
+    {
         HttpClient client = HttpClient.newBuilder().build();
 
         HttpRequest request = HttpRequest
@@ -51,9 +49,6 @@ public class API
         JsonObject jObject = JsonParser.parseString(response.body()).getAsJsonObject();
 
         Gson gson = new Gson();
-        APILatestReading latestReadingLastMonth = gson.fromJson(jObject.get("last_month"), APILatestReading.class);
-        List<APILatestReading> latestReadingsLastMonth = gson.fromJson(jObject.get("last_month"), ArrayList.class);
-
-        return latestReadingsLastMonth;
+        return gson.fromJson(jObject.get("last_month"), APILatestReading[].class);
     }
 }
