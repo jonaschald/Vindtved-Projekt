@@ -38,7 +38,7 @@ public class EnergiUtil {
     }
 
     public static double kw2persons(double kw) {
-        return kw / PERSON_DAILY;
+        return kw * 24 / PERSON_DAILY;
     }
 
     /*
