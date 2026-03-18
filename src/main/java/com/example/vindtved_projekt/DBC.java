@@ -1,9 +1,11 @@
 package com.example.vindtved_projekt;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
+import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -114,6 +116,44 @@ public class DBC {
 
                     sql.executeQuery();
                 } catch (SQLException ignored) {}
+            }
+        };
+
+        Future<?> future = executor.submit(runnable);
+        try {
+            future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void get(ObservableList<?> tabeldata) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                tabeldata.clear();
+
+                try (Connection forbindelse = kilde.getConnection()) {
+                    // TODO: fjern kommentar når vi ved hvad vi søger efter
+//                    String search = titel;
+//
+//                    if (!search.isEmpty()) {
+//                        search = "%" + search + "%";
+//                    }
+
+                    PreparedStatement sql = forbindelse.prepareStatement("SELECT * FROM ");
+
+                    ResultSet rs = sql.executeQuery();
+
+                    while (rs.next()) {
+                        // TODO: skab nye objekter her
+
+                        //tabeldata.add(objekt);
+                    }
+                } catch (
+                        SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         };
 
