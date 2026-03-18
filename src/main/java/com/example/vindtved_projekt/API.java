@@ -14,42 +14,48 @@ import java.net.http.HttpResponse;
 public class API
 {
     private String URI = "https://vind-og-klima-app.videnomvind.dk/api/stats?location=vindtved";
+    private HttpClient client;
+    private HttpRequest request;
 
-    public APILatestReading getLatestReading() throws URISyntaxException, IOException, InterruptedException
+    public APILatestReading getLatestReading()
     {
-        HttpClient client = HttpClient.newBuilder().build();
-
-        HttpRequest request = HttpRequest
-                .newBuilder()
-                .uri(new URI(URI))
-                .GET()
-                .build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
+        HttpResponse<String> response = requestData();
         JsonObject jObject = JsonParser.parseString(response.body()).getAsJsonObject();
-
         Gson gson = new Gson();
 
         return gson.fromJson(jObject.get("latest_reading"), APILatestReading.class);
     }
 
-    public APILatestReading[] getLatestReadingLastMonth() throws URISyntaxException, IOException, InterruptedException
+    public APILatestReading[] getLatestReadingLastMonth()
     {
-        HttpClient client = HttpClient.newBuilder().build();
-
-        HttpRequest request = HttpRequest
-                .newBuilder()
-                .uri(new URI(URI))
-                .GET()
-                .build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
+        HttpResponse<String> response = requestData();
         JsonObject jObject = JsonParser.parseString(response.body()).getAsJsonObject();
-
         Gson gson = new Gson();
 
         return gson.fromJson(jObject.get("last_month"), APILatestReading[].class);
+    }
+
+    private HttpResponse<String> requestData() {
+        if (client == null)
+            client = HttpClient.newBuilder().build();
+
+        try {
+            if (request == null)
+                request = HttpRequest
+                        .newBuilder()
+                        .uri(new URI(URI))
+                        .GET()
+                        .build();
+        } catch (URISyntaxException e) {
+            System.out.println("URI er ikke valid");
+            throw new RuntimeException(e);
+        }
+
+        try {
+            return client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            System.out.println("Kunne ikke sende Http Request:");
+            throw new RuntimeException(e);
+        }
     }
 }
