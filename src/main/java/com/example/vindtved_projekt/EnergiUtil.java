@@ -9,17 +9,11 @@ public class EnergiUtil {
 
     // Kilowatt timer til CO2 i kg
     public static double kwh2co2(double kwh, String rate) {
-        double r;
-        switch (rate.toLowerCase()) {
-            case "solar":
-                r = SOLAR_RATE;
-                break;
-            case "wind":
-                r = WIND_RATE;
-                break;
-            default:
-                throw new IllegalArgumentException(String.format("Ukendt rate: %s", rate));
-        }
+        double r = switch (rate.toLowerCase()) {
+            case "solar" -> SOLAR_RATE;
+            case "wind" -> WIND_RATE;
+            default -> throw new IllegalArgumentException(String.format("Ukendt rate: %s", rate));
+        };
 
         return kwh * r / 1000; // g => kg
     }
