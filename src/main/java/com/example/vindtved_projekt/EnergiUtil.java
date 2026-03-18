@@ -18,7 +18,7 @@ public class EnergiUtil {
                 r = WIND_RATE;
                 break;
             default:
-                throw new IllegalArgumentException(String.format("Ikke kendt rate: %s", rate));
+                throw new IllegalArgumentException(String.format("Ukendt rate: %s", rate));
         }
 
         return kwh * r / 1000; // g => kg
@@ -41,7 +41,7 @@ public class EnergiUtil {
         return kw / PERSON_DAILY;
     }
 
-    /**
+    /*
      taget fra javascript:
 
      daily_emission_of_district(data) {
@@ -60,7 +60,7 @@ public class EnergiUtil {
         return last_day_displacement / daily_emission;
     }
 
-    /**
+    /*
      taget fra javascript:
 
      daily_production_of_district(data) {
