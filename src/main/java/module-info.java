@@ -5,6 +5,7 @@ module com.example.vindtved_projekt {
     requires java.net.http;
     requires com.google.gson;
     requires javafx.base;
+    requires java.naming;
     requires transitive com.microsoft.sqlserver.jdbc;
     requires java.sql;
 
