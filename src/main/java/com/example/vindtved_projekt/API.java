@@ -13,7 +13,7 @@ import java.net.http.HttpResponse;
 
 public class API
 {
-    private String URI = "https://vind-og-klima-app.videnomvind.dk/api/stats?location=vindtved";
+    private final String URI = "https://vind-og-klima-app.videnomvind.dk/api/stats?location=vindtved";
     private HttpClient client;
     private HttpRequest request;
 
