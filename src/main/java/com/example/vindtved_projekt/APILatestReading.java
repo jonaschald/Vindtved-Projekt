@@ -1,18 +1,15 @@
 package com.example.vindtved_projekt;
 
 import com.google.gson.annotations.SerializedName;
-
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class APILatestReading
 {
     @SerializedName("solar_effect")
-    private String solarEffect;
+    public String solarEffect;
 
     @SerializedName("solar_gradiation")
-    private String solarGradiation;
+    public String solarGradiation;
 
     @SerializedName("wind_effect")
     public int windEffect;
