@@ -165,6 +165,8 @@ public class Controller
         APILatestReading latestReading = api.getLatestReading();
         List<APIMonthData> monthData = api.getLastMonth();
 
+        seriesM.getData().clear();
+
         for (APIMonthData month : monthData) {
             seriesM.getData().add(new XYChart.Data<>(month.date, month.daily_total));
             //System.out.println(month.daily_total);
