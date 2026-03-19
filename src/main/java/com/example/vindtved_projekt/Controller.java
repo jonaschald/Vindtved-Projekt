@@ -159,30 +159,35 @@ public class Controller
     }
 
     private void getData() {
-        System.out.println(api.getLatestReading().windSpeed);
-        System.out.println(api.getLatestReading().windEffect);
+        APILatestReading latestReading = api.getLatestReading();
+
+        System.out.println(latestReading.windSpeed);
+        System.out.println(latestReading.windEffect);
+
+
 
         // Viser effekten af hver mølle
-        m1Gauge.setValue(api.getLatestReading().data.turbines.get("wtg01"));
-        m2Gauge.setValue(api.getLatestReading().data.turbines.get("wtg02"));
-        m3Gauge.setValue(api.getLatestReading().data.turbines.get("wtg03"));
-        m4Gauge.setValue(api.getLatestReading().data.turbines.get("wtg04"));
-        m5Gauge.setValue(api.getLatestReading().data.turbines.get("wtg05"));
-        m6Gauge.setValue(api.getLatestReading().data.turbines.get("wtg06"));
+        m1Gauge.setValue(latestReading.data.turbines.get("wtg01"));
+        m2Gauge.setValue(latestReading.data.turbines.get("wtg02"));
+        m3Gauge.setValue(latestReading.data.turbines.get("wtg03"));
+        m4Gauge.setValue(latestReading.data.turbines.get("wtg04"));
+        m5Gauge.setValue(latestReading.data.turbines.get("wtg05"));
+        m6Gauge.setValue(latestReading.data.turbines.get("wtg06"));
 
         // Viser effekten af hver mølle og den samlede effekt af alle møller
-        m1sGauge.setValue(api.getLatestReading().data.turbines.get("wtg01"));
-        m2sGauge.setValue(api.getLatestReading().data.turbines.get("wtg02"));
-        m3sGauge.setValue(api.getLatestReading().data.turbines.get("wtg03"));
-        m4sGauge.setValue(api.getLatestReading().data.turbines.get("wtg04"));
-        m5sGauge.setValue(api.getLatestReading().data.turbines.get("wtg05"));
-        m6sGauge.setValue(api.getLatestReading().data.turbines.get("wtg06"));
-        effektSamletGauge.setValue(api.getLatestReading().windEffect);
+        m1sGauge.setValue(latestReading.data.turbines.get("wtg01"));
+        m2sGauge.setValue(latestReading.data.turbines.get("wtg02"));
+        m3sGauge.setValue(latestReading.data.turbines.get("wtg03"));
+        m4sGauge.setValue(latestReading.data.turbines.get("wtg04"));
+        m5sGauge.setValue(latestReading.data.turbines.get("wtg05"));
+        m6sGauge.setValue(latestReading.data.turbines.get("wtg06"));
+        effektSamletGauge.setValue(latestReading.windEffect);
 
         // Viser vindhastigheden
-        vindmsGauge.setValue(api.getLatestReading().windSpeed);
+        vindmsGauge.setValue(latestReading.windSpeed);
 
-
+        // Viser måneds oversigt
+        //lineChartMonth.setData();
     }
 
     // Metode der henter vindmølle data hvert 10. minut og gemmer det i vores database
