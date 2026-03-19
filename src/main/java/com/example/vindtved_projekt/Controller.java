@@ -78,6 +78,8 @@ public class Controller
 
     private Timeline venteTimer;
 
+    private API api = new API();
+
     public void initialize()
     {
         setUpGauges();
@@ -90,6 +92,10 @@ public class Controller
         samletEffektVBox.setVisible(false);
         vindhastighedVBox.setVisible(false);
         manedsOversigVBox.setVisible(false);
+
+        getData();
+
+        hentDataHvert2Minut();
     }
 
     // Knap viser info, også her programmes starter
@@ -152,14 +158,17 @@ public class Controller
         manedsOversigVBox.setVisible(true);
     }
 
+    private void getData() {
+        System.out.println(api.getLatestReading().windSpeed);
+    }
 
     // Metode der henter vindmølle data hvert 10. minut og gemmer det i vores database
-    private void hentDataHvert10Minut()
+    private void hentDataHvert2Minut()
     {
         venteTimer = new Timeline(
-                new KeyFrame(Duration.minutes(10), e ->
+                new KeyFrame(Duration.minutes(2), e ->
                 {
-
+                    getData();
                 })
         );
         venteTimer.setCycleCount(Timeline.INDEFINITE);
