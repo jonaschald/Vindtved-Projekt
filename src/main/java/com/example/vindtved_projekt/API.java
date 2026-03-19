@@ -26,6 +26,15 @@ public class API
         return gson.fromJson(jObject.get("latest_reading"), APILatestReading.class);
     }
 
+    public APIMathData getMathData()
+    {
+        HttpResponse<String> response = requestData();
+        JsonObject jObject = JsonParser.parseString(response.body()).getAsJsonObject();
+        Gson gson = new Gson();
+
+        return gson.fromJson(jObject, APIMathData.class);
+    }
+
     public APILatestReading[] getLatestReadingLastMonth()
     {
         HttpResponse<String> response = requestData();
