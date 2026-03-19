@@ -250,7 +250,7 @@ public class Controller
         seriesM.setName("Samlet effekt");
 
         // Tilføjer måneds oversigten til GridPane, der vises når knappen for måneds oversigt klikkes
-        manedsOversigGridPane.add(lineChartMonth, 1, 0);
+        manedsOversigGridPane.add(lineChartMonth, 0, 0);
     }
 
     // Metode til at lave Gauge til mølle effekt, så man kan kalde metoden og ikke skal skrive det samme igen og igen
