@@ -166,8 +166,11 @@ public class Controller
         List<APIMonthData> monthData = api.getLastMonth();
 
         for (APIMonthData month : monthData) {
-            System.out.println(month.daily_total);
+            seriesM.getData().add(new XYChart.Data<>(month.date, month.daily_total));
+            //System.out.println(month.daily_total);
         }
+
+        lineChartMonth.getData().addAll(seriesM);
 
         System.out.println(latestReading.windSpeed);
         System.out.println(latestReading.windEffect);

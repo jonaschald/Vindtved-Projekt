@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class APIMonthData {
     @SerializedName("date")
-    public Date date;
+    public String date;
 
     @SerializedName("daily_wind_total")
     public double daily_wind_total;
