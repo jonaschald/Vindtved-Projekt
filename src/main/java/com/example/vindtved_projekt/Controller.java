@@ -60,7 +60,7 @@ public class Controller
     Gauge m5sGauge;
     Gauge m6sGauge;
 
-    // Vind hastinghed m/s
+    // Vind hastighed m/s
     Gauge vindmsGauge;
 
     // Samlet effekt af alle møller
@@ -89,7 +89,8 @@ public class Controller
 
     // Knap viser info, også her programmes starter
     @FXML
-    void infoKnap(ActionEvent event) {
+    void infoKnap(ActionEvent event)
+    {
         infoVBox.setVisible(true);
         effektMølleVBox.setVisible(false);
         samletEffektVBox.setVisible(false);
@@ -99,7 +100,8 @@ public class Controller
 
     // Knap viser effekten pr. mølle
     @FXML
-    void effektMølleKnap(ActionEvent event) {
+    void effektMølleKnap(ActionEvent event)
+    {
         infoVBox.setVisible(false);
         effektMølleVBox.setVisible(true);
         samletEffektVBox.setVisible(false);
@@ -109,7 +111,8 @@ public class Controller
 
     // Knap viser alle møllerne og den samlede effekt af alle møllerne
     @FXML
-    void samletEffektKnap(ActionEvent event) {
+    void samletEffektKnap(ActionEvent event)
+    {
         infoVBox.setVisible(false);
         effektMølleVBox.setVisible(false);
         samletEffektVBox.setVisible(true);
@@ -119,7 +122,8 @@ public class Controller
 
     // Knap viser vindhastigheden
     @FXML
-    void vindhastighedKnap(ActionEvent event) {
+    void vindhastighedKnap(ActionEvent event)
+    {
         infoVBox.setVisible(false);
         effektMølleVBox.setVisible(false);
         samletEffektVBox.setVisible(false);
@@ -129,7 +133,8 @@ public class Controller
 
     // Knap viser måneds oversigten
     @FXML
-    void manedsOverdigtKnap(ActionEvent event) {
+    void manedsOverdigtKnap(ActionEvent event)
+    {
         infoVBox.setVisible(false);
         effektMølleVBox.setVisible(false);
         samletEffektVBox.setVisible(false);
@@ -151,7 +156,9 @@ public class Controller
         venteTimer.play();
     }
 
-    public void setUpGauges() {
+    // Metode til at sætte Gauges op til møllernes effekt og vindhastighed
+    public void setUpGauges()
+    {
         // Mølle 1, til pr. mølle
         m1Gauge = getGauge("Mølle 1 effekt");
         // Mølle 2, til pr. mølle
@@ -224,19 +231,21 @@ public class Controller
     }
 
     // LineChart der viser oversigten over den seneste måned
-    private void setUpLineChart(){
+    private void setUpLineChart()
+    {
         lineChartMonth.setAnimated(false);
         lineChartMonth.setTitle("Måneds Oversigt over samlet effekt");
         yAxisM.setLabel("Samlet effekt");
         xAxisM.setLabel("Dato");
         seriesM.setName("Samlet effekt");
 
-        // Tilføjer måneds oversigen til GridPane, der vises når knappen for måneds oversigt klikkes
+        // Tilføjer måneds oversigten til GridPane, der vises når knappen for måneds oversigt klikkes
         manedsOversigGridPane.add(lineChartMonth, 1, 0);
     }
 
     // Metode til at lave Gauge til mølle effekt, så man kan kalde metoden og ikke skal skrive det samme igen og igen
-    private Gauge getGauge(String title){
+    private Gauge getGauge(String title)
+    {
         Gauge gauge = GaugeBuilder.create()
                 .skinType(Gauge.SkinType.FLAT)
                 .title(title)
