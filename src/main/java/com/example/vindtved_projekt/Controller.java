@@ -16,6 +16,9 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
+import java.util.List;
+import java.util.Map;
+
 public class Controller
 {
     @FXML
@@ -160,11 +163,14 @@ public class Controller
 
     private void getData() {
         APILatestReading latestReading = api.getLatestReading();
+        List<APIMonthData> monthData = api.getLastMonth();
+
+        for (APIMonthData month : monthData) {
+            System.out.println(month.daily_total);
+        }
 
         System.out.println(latestReading.windSpeed);
         System.out.println(latestReading.windEffect);
-
-
 
         // Viser effekten af hver mølle
         m1Gauge.setValue(latestReading.data.turbines.get("wtg01"));

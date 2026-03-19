@@ -3,13 +3,17 @@ package com.example.vindtved_projekt;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
 
 public class API
 {
@@ -33,6 +37,17 @@ public class API
         Gson gson = new Gson();
 
         return gson.fromJson(jObject, APIMathData.class);
+    }
+
+    public List<APIMonthData> getLastMonth()
+    {
+        HttpResponse<String> response = requestData();
+        JsonObject jObject = JsonParser.parseString(response.body()).getAsJsonObject();
+        Gson gson = new Gson();
+
+        Type type = new TypeToken<List<APIMonthData>>(){}.getType();
+
+        return gson.fromJson(jObject.get("last_month"), type);
     }
 
     public APILatestReading[] getLatestReadingLastMonth()
