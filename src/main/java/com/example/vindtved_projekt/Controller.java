@@ -8,6 +8,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import javafx.event.ActionEvent;
@@ -17,6 +18,9 @@ import javafx.scene.layout.VBox;
 
 public class Controller
 {
+    @FXML
+    private Pane startBilledePane;
+
     @FXML
     private VBox infoVBox;
     @FXML
@@ -79,8 +83,9 @@ public class Controller
         setUpGauges();
         setUpLineChart();
 
-        // Programmet starter på info skærmen
-        infoVBox.setVisible(true);
+        // Programmet starter på et billede af møllerne
+        startBilledePane.setVisible(true);
+        infoVBox.setVisible(false);
         effektMølleVBox.setVisible(false);
         samletEffektVBox.setVisible(false);
         vindhastighedVBox.setVisible(false);
@@ -91,6 +96,7 @@ public class Controller
     @FXML
     void infoKnap(ActionEvent event)
     {
+        startBilledePane.setVisible(false);
         infoVBox.setVisible(true);
         effektMølleVBox.setVisible(false);
         samletEffektVBox.setVisible(false);
@@ -102,6 +108,7 @@ public class Controller
     @FXML
     void effektMølleKnap(ActionEvent event)
     {
+        startBilledePane.setVisible(false);
         infoVBox.setVisible(false);
         effektMølleVBox.setVisible(true);
         samletEffektVBox.setVisible(false);
@@ -113,6 +120,7 @@ public class Controller
     @FXML
     void samletEffektKnap(ActionEvent event)
     {
+        startBilledePane.setVisible(false);
         infoVBox.setVisible(false);
         effektMølleVBox.setVisible(false);
         samletEffektVBox.setVisible(true);
@@ -124,6 +132,7 @@ public class Controller
     @FXML
     void vindhastighedKnap(ActionEvent event)
     {
+        startBilledePane.setVisible(false);
         infoVBox.setVisible(false);
         effektMølleVBox.setVisible(false);
         samletEffektVBox.setVisible(false);
@@ -135,6 +144,7 @@ public class Controller
     @FXML
     void manedsOverdigtKnap(ActionEvent event)
     {
+        startBilledePane.setVisible(false);
         infoVBox.setVisible(false);
         effektMølleVBox.setVisible(false);
         samletEffektVBox.setVisible(false);
